@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const PatientSchema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId, // Stores the creator's ID
     ref: 'user',
     required: true,
   },

@@ -17,6 +17,10 @@ app.use('/api/patients', require('./routes/patientRoutes'));
 app.use('/api/food', require('./routes/foodRoutes'));
 app.use('/api/diet-charts', require('./routes/dietChartRoutes')); // <-- ADD THIS LINE
 app.use('/api/recipes', require('./routes/recipeRoutes')); // <-- ADD THIS LINE
+// ... other routes
+app.use('/api/recipes', require('./routes/recipeRoutes'));
+app.use('/api/reports', require('./routes/reportRoutes')); // <-- ADD THIS LINE
+// ...
 
 const PORT = process.env.PORT || 5000;
 

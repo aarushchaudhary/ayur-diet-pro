@@ -1,0 +1,50 @@
+// ----------COLOR PALETTE----------
+$primary: #2b8a78;
+$secondary: #f08a5d;
+$white: #ffffff;
+$black: #000000;
+$dark-grey: #65737e;
+$light-grey: #e6eef0;
+$light-green: #eef7f4;
+$lighter-green: #f6faf8;
+$glass: rgba(255, 255, 255, 0.6);
+
+//-------------MIXINS--------------
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            '#{$key}': $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+//-------------THEMES--------------
+$themes: (
+  light: (
+    'background': $light-green,
+    'background-alt': $lighter-green,
+    'foreground': $dark-grey,
+    'card-background': $white,
+    'primary-action': $primary,
+    'secondary-action': $secondary,
+  ),
+  dark: (
+    'background': #222b45,
+    'background-alt': #1a2138,
+    'card-background': #1f273a,
+    'foreground': $white,
+    'primary-action': $primary,
+    'secondary-action': $secondary,
+  ),
+);

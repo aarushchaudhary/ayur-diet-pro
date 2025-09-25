@@ -42,6 +42,8 @@ const processPatientData = (patientObject, operation) => {
 
 // @desc    Get all patients for a user (and decrypt them)
 const getPatients = asyncHandler(async (req, res) => {
+  // This line tells the database:
+  // "Find only the patients where the 'user' field matches the logged-in user's ID."
   const patients = await Patient.find({ user: req.user.id });
 
   // CORRECTED DECRYPTION LOGIC
