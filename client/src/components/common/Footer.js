@@ -3,7 +3,7 @@ import React from 'react';
 function Footer() {
   return (
     <footer>
-      Prototype UI — Designed for Ayurvedic practitioners. Replace mock data with real food database & nutrient engine.
+      © 2025 Web Weavers. All Rights Reserved.
     </footer>
   );
 }

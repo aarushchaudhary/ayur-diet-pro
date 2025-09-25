@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import authService from '../services/authService'; // Import the auth service
+import authService from '../services/authService';
 
-function LoginPage() {
+function RegistrationPage() {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
   });
@@ -17,13 +18,13 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError('');
     try {
-      await authService.login(formData);
-      navigate('/dashboard'); // Redirect to dashboard on successful login
+      await authService.register(formData);
+      alert('Registration successful! Please log in.');
+      navigate('/login');
     } catch (err) {
-      // Set error message from server response, or a default one
-      const message = err.response?.data?.message || 'Invalid credentials. Please try again.';
+      const message = err.response?.data?.message || 'Registration failed. Please try again.';
       setError(message);
     }
   };
@@ -31,10 +32,17 @@ function LoginPage() {
   return (
     <div id="login-view">
       <div id="loginBox">
-        <h2 id="formTitle">Login</h2>
+        <h2 id="formTitle">Create an Account</h2>
         <form onSubmit={handleSubmit}>
-          {/* Display error message if it exists */}
           {error && <p className="error-message">{error}</p>}
+          <input
+            name="name"
+            type="text"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
           <input
             name="email"
             type="email"
@@ -51,14 +59,14 @@ function LoginPage() {
             onChange={handleChange}
             required
           />
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
         </form>
         <span id="toggleLink">
-          Not registered? <Link to="/register">Create an account</Link>
+          Already registered? <Link to="/login">Login here</Link>
         </span>
       </div>
     </div>
   );
 }
 
-export default LoginPage;
+export default RegistrationPage;

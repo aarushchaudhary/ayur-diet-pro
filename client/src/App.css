@@ -251,3 +251,241 @@ footer { padding: 30px 40px; color: var(--muted); font-size: 13px; }
 .logout-btn:hover {
   background-color: #e53935; /* A slightly darker red on hover */
 }
+
+footer {
+  width: 100%;
+  padding: 20px 40px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+  margin-top: auto; /* Pushes the footer to the bottom */
+}
+
+/* --- Modal Styles --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.patient-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.patient-form input,
+.patient-form select,
+.patient-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e6eef0;
+  background: #fbffff;
+  font-size: 14px;
+}
+
+.form-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn-save {
+  background: var(--accent);
+  color: white;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-delete {
+  color: #ef5350; /* Red color for delete */
+}
+
+.error-message {
+  color: #ef5350; /* Red color for errors */
+  background-color: rgba(239, 83, 80, 0.1);
+  border: 1px solid rgba(239, 83, 80, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* --- Diet Chart Page Styles --- */
+.patient-selector {
+  margin-bottom: 20px;
+  background-color: #f8fcfb;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.patient-selector label {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.patient-selector select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #e6eef0;
+}
+
+.diet-chart-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.diet-chart-card {
+  background: white;
+  border: 1px solid #eef6f5;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(24, 39, 51, 0.05);
+}
+
+.diet-chart-card h4 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+/* --- Form Grid for Food Modal --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.patient-form h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  border-bottom: 1px solid #eef6f5;
+  padding-bottom: 5px;
+}
+
+/* --- Modal Scroll Fix --- */
+
+.modal-backdrop {
+  /* This ensures the backdrop itself doesn't block scrolling */
+  overflow-y: auto; 
+  padding: 5vh 0; /* Adds some top/bottom space for scrolling */
+}
+
+.modal-content {
+  /* We remove height constraints here to let it grow naturally */
+  max-height: none; 
+  overflow-y: visible; /* Let the backdrop handle the scroll */
+  margin: 0 auto; /* Keeps it centered */
+}
+
+.patient-form h4 {
+  /* Sticky headers for better UX during scroll */
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding-top: 10px;
+  z-index: 1;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  width: 100%;
+  /* Increase the max-width to make the modal wider */
+  max-width: 800px; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  /* Ensure it can still scroll if the screen is very small */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* --- Recipe Page Styles --- */
+.recipe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.recipe-card {
+  background: white;
+  border: 1px solid #eef6f5;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px H10px rgba(24, 39, 51, 0.05);
+}
+
+.recipe-card h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.recipe-card ul {
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.recipe-instructions {
+  font-size: 14px;
+  color: #65737e;
+  min-height: 40px;
+}
+
+.ingredient-row {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* --- Patient Form Tabs --- */
+.form-tabs {
+  display: flex;
+  border-bottom: 1px solid #e6eef0;
+  margin-bottom: 20px;
+}
+
+.form-tabs button {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+}
+
+.form-tabs button.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.form-grid .full-width {
+  grid-column: 1 / -1; /* Makes an input span the full width of the grid */
+}

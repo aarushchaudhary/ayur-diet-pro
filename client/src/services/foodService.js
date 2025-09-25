@@ -7,24 +7,38 @@ const getToken = () => {
   return user?.token;
 };
 
+// Create config object with authorization header
+const getConfig = () => ({
+  headers: {
+    Authorization: `Bearer ${getToken()}`,
+  },
+});
+
 // Get all food items
-const getFoods = async () => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
-  };
-  try {
-    const response = await axios.get(API_URL, config);
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch food items:", error);
-    return []; // Return empty array on error
-  }
+const getFoods = () => {
+  return axios.get(API_URL, getConfig());
+};
+
+// Create a new food item
+const createFood = (foodData) => {
+  return axios.post(API_URL, foodData, getConfig());
+};
+
+// Update a food item
+const updateFood = (id, foodData) => {
+  return axios.put(API_URL + id, foodData, getConfig());
+};
+
+// Delete a food item
+const deleteFood = (id) => {
+  return axios.delete(API_URL + id, getConfig());
 };
 
 const foodService = {
   getFoods,
+  createFood,
+  updateFood,
+  deleteFood,
 };
 
 export default foodService;

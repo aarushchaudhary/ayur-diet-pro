@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import authService from '../../services/authService'; // Import the auth service
 
 // A simple component for icon-based nav links
 const NavItem = ({ to, icon, label }) => (
@@ -13,7 +14,7 @@ function Header() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // In a real app, you would call authService.logout()
+    authService.logout(); // Call the service to clear user data
     navigate('/login');
   };
 
@@ -23,8 +24,8 @@ function Header() {
       <div className="brand">
         <div className="logo">AD</div>
         <div>
-          <h1>Ayurvedic Diet Management</h1>
-          <p>Prototype UI — Ayurveda-aware diet charts</p>
+          <h1>Ayur Diet Pro</h1>
+          <p>Ayurvedic Diet Management Software</p>
         </div>
       </div>
 
