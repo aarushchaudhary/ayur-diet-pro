@@ -1,0 +1,253 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+:root {
+  --bg: #f6faf8;
+  --card: #ffffff;
+  --muted: #65737e;
+  --accent: #2b8a78;
+  --accent-2: #f08a5d;
+  --glass: rgba(255, 255, 255, 0.6);
+  --shadow: 0 6px 18px rgba(24, 39, 51, 0.08);
+  --radius: 14px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg), #eef7f4);
+  color: #10303a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Login */
+#login-view {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100vh; text-align: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+}
+#loginBox {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px; border-radius: 14px;
+  box-shadow: var(--shadow); width: 320px;
+  backdrop-filter: blur(6px);
+}
+#loginBox h2 { margin-bottom: 20px; }
+#loginBox input { width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 0; }
+#loginBox button { margin-top: 12px; width: 100%; padding: 10px; border-radius: 8px; background: var(--card); color: var(--accent); font-weight: 600; cursor: pointer; }
+#toggleLink { color: #fff; text-decoration: underline; cursor: pointer; font-size: 13px; display: block; margin-top: 12px; }
+
+/* Header */
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 40px; gap: 20px;
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.logo { width: 52px; height: 52px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: grid; place-items: center; color: white;
+  font-weight: 700; font-size: 20px; box-shadow: var(--shadow);
+}
+h1 { margin: 0; font-size: 20px; }
+header p { margin: 0; color: var(--muted); font-size: 13px; }
+
+.nav-links { display: flex; gap: 20px; }
+.nav-link { padding: 8px 16px; border-radius: 8px; font-weight: 500; color: var(--muted); text-decoration: none; transition: 0.2s; }
+.nav-link.active, .nav-link:hover { background: rgba(43, 138, 120, 0.1); color: var(--accent); }
+
+/* Layout */
+main { display: grid; grid-template-columns: 420px 1fr; gap: 28px; padding: 0 40px 60px; }
+.panel { background: var(--card); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); }
+.panel h2 { margin: 0 0 12px; font-size: 16px; }
+.form-row { display: flex; gap: 10px; margin-bottom: 10px; }
+label { font-size: 13px; color: var(--muted); }
+input[type=text], input[type=number], select, textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e6eef0; background: #fbffff; }
+textarea { min-height: 72px; }
+.small { font-size: 13px; color: var(--muted); }
+button { background: var(--accent); color: white; padding: 10px 14px; border-radius: 10px; border: 0; cursor: pointer; font-weight: 600; }
+.btn-ghost { background: none; border: 1px solid #e6eef0; color: var(--accent); padding: 8px 10px; }
+
+/* Foods */
+.food-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-height: 190px; overflow: auto; padding-top: 8px; }
+.food-card { background: linear-gradient(180deg, rgba(43, 138, 120, 0.06), rgba(240, 138, 93, 0.03)); padding: 8px; border-radius: 10px; border: 1px solid rgba(16, 48, 58, 0.04); display: flex; align-items: center; justify-content: space-between; }
+.food-meta { font-size: 13px; color: #0f2930; }
+.badge { font-size: 12px; padding: 6px; border-radius: 8px; background: rgba(16, 48, 58, 0.06); }
+
+/* Preview */
+.preview { padding: 18px; border-radius: 12px; min-height: 520px; }
+.hero { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.hero-left h3 { margin: 0; font-size: 18px; }
+.stats { display: flex; gap: 12px; }
+.stat { background: var(--glass); padding: 10px; border-radius: 10px; min-width: 110px; text-align: center; box-shadow: 0 4px 14px rgba(16, 48, 58, 0.03); }
+.stat small { display: block; color: var(--muted); }
+
+.diet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+.diet-card { background: linear-gradient(180deg, white, #fbffff); padding: 12px; border-radius: 12px; border: 1px solid #eef6f5; }
+.diet-card h4 { margin: 0 0 8px; }
+.meal-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #eef6f5; font-size: 14px; }
+.meal-item:last-child { border-bottom: 0; }
+
+/* Table */
+.table-container { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
+.patient-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+.patient-table th, .patient-table td { text-align: left; padding: 12px 15px; border-bottom: 1px solid #e6eef0; }
+.patient-table th { background-color: #f8fcfb; font-weight: 600; color: var(--muted); text-transform: uppercase; font-size: 14px; }
+.patient-table tr:last-child td { border-bottom: none; }
+
+footer { padding: 30px 40px; color: var(--muted); font-size: 13px; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  main { grid-template-columns: 1fr; padding: 0 18px 40px; }
+  .diet-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .diet-grid { grid-template-columns: 1fr; }
+}
+
+/* Print */
+@media print {
+  body { background: white; }
+  #app-header, footer, .controls { display: none; }
+  main { grid-template-columns: 1fr !important; }
+}
+
+.dashboard-container {
+  padding: 0 40px 60px; /* Re-add padding */
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column;
+  align-items: center; /* Center the content horizontally */
+}
+
+.table-container {
+  width: 100%; /* Ensure the container takes full width */
+  max-width: 1200px; /* Optional: set a max-width for very large screens */
+}
+
+/* Add Google Icons font */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
+
+/* Header Tweaks */
+.nav-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  background: var(--glass);
+  border: 1px solid #eef6f5;
+  border-radius: 12px;
+  padding: 6px;
+  display: flex;
+  gap: 6px; /* Reduced gap */
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px; /* Adjusted padding */
+  border-radius: 8px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.new-chart-btn {
+  background-color: var(--accent);
+  color: white;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Add Google Icons font */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
+
+/* Header Tweaks */
+.nav-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  background: var(--glass);
+  border: 1px solid #eef6f5;
+  border-radius: 12px;
+  padding: 6px;
+  display: flex;
+  gap: 6px; /* Reduced gap */
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px; /* Adjusted padding */
+  border-radius: 8px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Styling for the red logout button */
+.logout-btn {
+  background-color: #ef5350; /* A nice shade of red */
+  color: white !important; /* Ensures the text is white */
+  border: none;
+  font-weight: 500;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-size: 14px;
+}
+
+.logout-btn:hover {
+  background-color: #e53935; /* A slightly darker red on hover */
+}

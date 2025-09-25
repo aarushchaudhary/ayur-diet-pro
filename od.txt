@@ -1,0 +1,59 @@
+/ayurvedic-diet-management/
+├── client/                   # React Frontend
+│   ├── public/
+│   │   ├── index.html        # Main HTML file
+│   │   └── favicon.ico
+│   ├── src/
+│   │   ├── assets/           # Images, fonts, etc.
+│   │   │   └── logo.png
+│   │   ├── components/       # Reusable UI components
+│   │   │   ├── auth/
+│   │   │   │   └── LoginForm.js
+│   │   │   ├── common/
+│   │   │   │   ├── Header.js
+│   │   │   │   ├── Footer.js
+│   │   │   │   └── Button.js
+│   │   │   ├── dashboard/
+│   │   │   │   └── PatientTable.js
+│   │   │   └── diet-chart/
+│   │   │       ├── PatientProfile.js
+│   │   │       ├── FoodSearch.js
+│   │   │       ├── RecipeBuilder.js
+│   │   │       └── DietPreview.js
+│   │   ├── services/         # API call functions (e.g., using Axios)
+│   │   │   ├── authService.js
+│   │   │   ├── patientService.js
+│   │   │   └── foodService.js
+│   │   ├── views/  # Main page components
+│   │   │   ├── LoginPage.js
+│   │   │   ├── DashboardPage.js
+│   │   │   └── DietChartPage.js
+│   │   ├── App.js            # Main app component with routing
+│   │   ├── index.js          # Entry point for React
+│   │   └── App.css           # Global styles
+│   └── package.json
+│
+├── server/                   # Node.js & Express Backend
+│   ├── config/
+│   │   └── db.js             # Database connection logic
+│   ├── controllers/          # Request handling logic
+│   │   ├── authController.js
+│   │   ├── patientController.js
+│   │   └── foodController.js
+│   ├── middleware/
+│   │   └── authMiddleware.js # For protecting routes
+│   ├── models/               # Mongoose schemas
+│   │   ├── User.js
+│   │   ├── Patient.js
+│   │   ├── Food.js
+│   │   └── DietChart.js
+│   ├── routes/               # API endpoint definitions
+│   │   ├── authRoutes.js
+│   │   ├── patientRoutes.js
+│   │   └── foodRoutes.js
+│   ├── .env                  # Environment variables (DB_URI, JWT_SECRET)
+│   ├── server.js             # Main server entry point
+│   └── package.json 
+│
+├── .gitignore                # Root gitignore
+└── README.md                 # Project documentation
