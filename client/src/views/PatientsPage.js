@@ -9,6 +9,7 @@ const PatientFormModal = ({ patient, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
     // Basic Info
     name: '',
+    abhaId: '',
     gender: 'female',
     dob: '',
     // Nutrition & Habits
@@ -31,6 +32,7 @@ const PatientFormModal = ({ patient, onSave, onCancel }) => {
     if (patient) {
       setFormData({
         name: patient.name || '',
+        abhaId: patient.abhaId || '',
         gender: patient.gender || 'female',
         dob: patient.dob ? new Date(patient.dob).toISOString().split('T')[0] : '',
         dietaryHabits: patient.dietaryHabits || '',
@@ -101,6 +103,7 @@ const PatientFormModal = ({ patient, onSave, onCancel }) => {
         return (
           <div className="form-grid">
             <input name="name" value={formData.name} onChange={handleChange} placeholder="Name" required />
+            <input name="abhaId" value={formData.abhaId} onChange={handleChange} placeholder="ABHA ID (e.g., 12-3456-7890-1234)" />
             <input name="dob" value={formData.dob} onChange={handleChange} type="date" required />
             <select name="gender" value={formData.gender} onChange={handleChange}>
               <option value="female">Female</option>
@@ -205,6 +208,7 @@ function PatientsPage() {
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>ABHA ID</th>
                   <th>Gender</th>
                   <th>D.O.B</th>
                   <th>Activity Level</th>
@@ -215,6 +219,7 @@ function PatientsPage() {
                 {patients.length > 0 ? patients.map(p => (
                   <tr key={p._id}>
                     <td>{p.name}</td>
+                    <td>{p.abhaId || 'N/A'}</td>
                     <td>{p.gender}</td>
                     <td>{p.dob ? new Date(p.dob).toLocaleDateString() : 'N/A'}</td>
                     <td>{p.activityLevel || 'N/A'}</td>
@@ -225,7 +230,7 @@ function PatientsPage() {
                   </tr>
                 )) : (
                   <tr>
-                    <td colSpan="5" style={{ textAlign: 'center' }}>No patients found.</td>
+                    <td colSpan="6" style={{ textAlign: 'center' }}>No patients found.</td>
                   </tr>
                 )}
               </tbody>

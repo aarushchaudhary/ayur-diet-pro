@@ -10,6 +10,7 @@ const PatientSchema = new mongoose.Schema({
   // Basic Info
   name: { type: String, required: true }, // Not encrypted
   // --- All fields below will be stored as encrypted strings ---
+  abhaId: { type: String }, // ABHA ID (Ayushman Bharat Health Account ID)
   gender: { type: String, required: true },
   dob: { type: String, required: true },
 

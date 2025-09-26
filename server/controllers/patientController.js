@@ -26,15 +26,26 @@ const processPatientData = (patientObject, operation) => {
     const func = operation === 'encrypt' ? encrypt : decrypt;
     const processed = { ...patientObject };
     const fieldsToProcess = [
-        'gender', 'dob', 'dietaryHabits', 'mealFrequency', 'foodPreferences',
+        'abhaId', 'gender', 'dob', 'dietaryHabits', 'mealFrequency', 'foodPreferences',
         'waterIntake', 'bowelMovements', 'medicalConditions', 'medications',
         'supplements', 'allergies', 'bloodType', 'height', 'weight', 'BMI',
         'waistCircumference', 'activityLevel', 'sleepPattern', 'stressLevel',
         'smokingStatus', 'alcoholIntake', 'notes', 'lastVisit'
     ];
+    
     for (const key of fieldsToProcess) {
-        if (processed[key]) {
-            processed[key] = func(processed[key]);
+        if (processed[key] !== null && processed[key] !== undefined && processed[key] !== '') {
+            // Handle arrays specially
+            if (Array.isArray(processed[key])) {
+                processed[key] = processed[key].map(item => {
+                    if (item !== null && item !== undefined && item !== '') {
+                        return func(item);
+                    }
+                    return item;
+                }).filter(item => item !== null && item !== undefined && item !== '');
+            } else {
+                processed[key] = func(processed[key]);
+            }
         }
     }
     return processed;
@@ -48,7 +59,8 @@ const getPatients = asyncHandler(async (req, res) => {
 
   // CORRECTED DECRYPTION LOGIC
   const decryptedPatients = patients.map(p => {
-    const plainPatient = processPatientData(p.toObject(), 'decrypt');
+    const patientObj = p.toObject();
+    const plainPatient = processPatientData(patientObj, 'decrypt');
     plainPatient._id = p._id;
     plainPatient.name = p.name; // Name is not encrypted
     return plainPatient;
@@ -64,7 +76,9 @@ const addPatient = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Please provide name, date of birth, and gender');
   }
+  
   const encryptedData = processPatientData(req.body, 'encrypt');
+  
   const patient = await Patient.create({
     ...encryptedData,
     name,

@@ -27,6 +27,7 @@ function PatientTable() {
       <thead>
         <tr>
           <th>Name</th>
+          <th>ABHA ID</th>
           <th>Age</th>
           <th>Gender</th>
           <th>Dietary Habits</th>
@@ -39,6 +40,7 @@ function PatientTable() {
           patients.map((p, index) => (
             <tr key={p._id || index}> {/* Use a unique key like _id from MongoDB */}
               <td>{p.name}</td>
+              <td>{p.abhaId || 'N/A'}</td>
               <td>{p.age}</td>
               <td>{p.gender}</td>
               <td>{p.dietaryHabits || 'N/A'}</td>
@@ -49,7 +51,7 @@ function PatientTable() {
         ) : (
           // Display a message if no patients are found
           <tr>
-            <td colSpan="5" style={{ textAlign: 'center' }}>No patients found. Add one from the Diet Chart page!</td>
+            <td colSpan="6" style={{ textAlign: 'center' }}>No patients found. Add one from the Diet Chart page!</td>
           </tr>
         )}
       </tbody>
