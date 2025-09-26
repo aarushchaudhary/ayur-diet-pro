@@ -32,14 +32,19 @@ function DashboardPage() {
   useEffect(() => {
     const fetchPatients = async () => {
         try {
-            // THE FIX IS HERE: We get the response object...
-            const response = await patientService.getPatients();
-            // ...and we set our state to response.data, which is the array.
-            // The `|| []` is a safety net in case the API returns nothing.
+            // Fetch the 5 most recent patients who have diet charts
+            const response = await patientService.getRecentPatientsWithCharts();
             setPatients(response.data || []);
         } catch (error) {
-            console.error('Error fetching patients:', error);
-            setPatients([]); // Also ensure patients is an array on error
+            console.error('Error fetching recent patients with charts:', error);
+            // Fallback to showing all patients (limited to 5)
+            try {
+                const allPatientsResponse = await patientService.getPatients();
+                setPatients((allPatientsResponse.data || []).slice(0, 5));
+            } catch (fallbackError) {
+                console.error('Fallback also failed:', fallbackError);
+                setPatients([]);
+            }
         }
     };
     fetchPatients();

@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Patient = require('../models/Patient');
+const DietChart = require('../models/DietChart');
 const CryptoJS = require('crypto-js');
 
 // --- Encryption & Decryption Helpers ---
@@ -81,6 +82,35 @@ const getPatient = asyncHandler(async (req, res) => {
 });
 // --- END OF NEW FUNCTION ---
 
+// @desc    Get the 5 most recent patients with diet charts
+// @route   GET /api/patients/recent-with-charts
+const getRecentPatientsWithCharts = asyncHandler(async (req, res) => {
+  // 1. Find the most recent diet charts for the logged-in user
+  const recentCharts = await DietChart.find({ user: req.user.id })
+    .sort({ createdAt: -1 }) // Sort by creation date, newest first
+    .populate('patient');     // Include the full patient details
+
+  // 2. Create a unique list of patients from these charts
+  const uniquePatients = [];
+  const patientIds = new Set();
+
+  for (const chart of recentCharts) {
+    if (chart.patient && !patientIds.has(chart.patient._id.toString())) {
+      patientIds.add(chart.patient._id.toString());
+      
+      // Decrypt patient data before sending
+      const patientObj = chart.patient.toObject();
+      const plainPatient = processPatientData(patientObj, 'decrypt');
+      plainPatient._id = chart.patient._id;
+      
+      uniquePatients.push(plainPatient);
+    }
+  }
+
+  // 3. Return the first 5 unique patients
+  res.status(200).json(uniquePatients.slice(0, 5));
+});
+
 // @desc    Add a new patient (and encrypt their data)
 const addPatient = asyncHandler(async (req, res) => {
   const { name, dob, gender } = req.body;
@@ -126,6 +156,7 @@ const deletePatient = asyncHandler(async (req, res) => {
 module.exports = {
   getPatients,
   getPatient, // <-- Make sure to export the new function
+  getRecentPatientsWithCharts,
   addPatient,
   updatePatient,
   deletePatient,

@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import patientService from '../../services/patientService'; // Import the patient service
+import React from 'react';
 import { calculateAge } from '../../utils/dateUtils';
 
-function PatientTable() {
-  const [patients, setPatients] = useState([]); // State to hold the patient data
-  const [isLoading, setIsLoading] = useState(true); // State to handle loading status
-
-  useEffect(() => {
-    // Fetch patients when the component mounts
-    const fetchPatients = async () => {
-      setIsLoading(true);
-      const data = await patientService.getPatients();
-      setPatients(data);
-      setIsLoading(false);
-    };
-
-    fetchPatients();
-  }, []); // The empty array ensures this runs only once
-
-  // Display a loading message while fetching data
-  if (isLoading) {
-    return <div>Loading patients...</div>;
-  }
-
+function PatientTable({ patients }) {
   return (
     <table className="patient-table">
       <thead>
@@ -37,7 +16,7 @@ function PatientTable() {
       </thead>
       <tbody>
         {/* Check if there are patients to display */}
-        {patients.length > 0 ? (
+        {patients && patients.length > 0 ? (
           patients.map((p, index) => (
             <tr key={p._id || index}> {/* Use a unique key like _id from MongoDB */}
               <td>{p.name}</td>
@@ -46,7 +25,7 @@ function PatientTable() {
               <td>{p.gender}</td>
               <td>{p.dietaryHabits || 'N/A'}</td>
               {/* Format the date for better readability */}
-              <td>{new Date(p.lastVisit).toLocaleDateString()}</td>
+              <td>{p.lastVisit ? new Date(p.lastVisit).toLocaleDateString() : 'N/A'}</td>
             </tr>
           ))
         ) : (

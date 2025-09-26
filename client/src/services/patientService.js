@@ -39,12 +39,18 @@ const deletePatient = (id) => {
   return axios.delete(API_URL + id, getConfig());
 };
 
+// Get the 5 most recent patients with diet charts
+const getRecentPatientsWithCharts = () => {
+  return axios.get(`${API_URL}recent-with-charts`, getConfig());
+};
+
 const patientService = {
   createPatient,
   getPatients,
   getPatient,
   updatePatient,
   deletePatient,
+  getRecentPatientsWithCharts,
 };
 
 export default patientService;
