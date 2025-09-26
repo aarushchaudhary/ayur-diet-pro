@@ -3,19 +3,18 @@ const router = express.Router();
 const {
   getDietChartsForPatient,
   createDietChart,
+  getDietChart, // 1. Import the new function
   updateDietChart,
   deleteDietChart,
 } = require('../controllers/dietChartController');
 const { protect } = require('../middleware/authMiddleware');
 
-// Route to get all charts for a specific patient
 router.route('/patient/:patientId').get(protect, getDietChartsForPatient);
+router.route('/').post(protect, createDietChart);
 
-// Route to create a new diet chart
-router.route('/').post(protect, createDietChart); // Corrected this line
-
-// Routes to update or delete a specific diet chart by its ID
+// Add the .get() method to this route
 router.route('/:id')
+  .get(protect, getDietChart) // 2. Add this .get() method
   .put(protect, updateDietChart)
   .delete(protect, deleteDietChart);
 

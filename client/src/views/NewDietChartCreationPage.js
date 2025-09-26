@@ -201,14 +201,16 @@ function NewDietChartCreationPage() {
           </div>
         </div>
         
-        <div className="tab-navigation" style={{ marginBottom: '28px', display: 'flex', gap: '10px' }}>
-          <button className={`tab-button ${activeTab === 'foods' ? 'active' : ''}`} onClick={() => setActiveTab('foods')}>Food & Recipe Library</button>
-          <button className={`tab-button ${activeTab === 'plan' ? 'active' : ''}`} onClick={() => setActiveTab('plan')}>Daily Diet Plan Editor</button>
-          <button className={`tab-button ${activeTab === 'analytics' ? 'active' : ''}`} onClick={() => setActiveTab('analytics')}>Real-Time Analytics</button>
-        </div>
-        
-        <div className="tab-content-area">
-          {renderActiveTab()}
+        <div className="tabs-wrapper">
+          <div className="tab-navigation">
+            <button className={`tab-button ${activeTab === 'foods' ? 'active' : ''}`} onClick={() => setActiveTab('foods')}>Foods</button>
+            <button className={`tab-button ${activeTab === 'plan' ? 'active' : ''}`} onClick={() => setActiveTab('plan')}>Plan</button>
+            <button className={`tab-button ${activeTab === 'analytics' ? 'active' : ''}`} onClick={() => setActiveTab('analytics')}>Analytics</button>
+          </div>
+          
+          <div className="tab-content-area">
+            {renderActiveTab()}
+          </div>
         </div>
       </main>
       <Footer />

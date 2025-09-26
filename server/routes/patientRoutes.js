@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {
   getPatients,
+  getPatient, // 1. Import the new function
   addPatient,
   updatePatient,
   deletePatient,
@@ -13,6 +14,7 @@ router.route('/')
   .post(protect, addPatient);
 
 router.route('/:id')
+  .get(protect, getPatient) // 2. Add this .get() method
   .put(protect, updatePatient)
   .delete(protect, deletePatient);
 
