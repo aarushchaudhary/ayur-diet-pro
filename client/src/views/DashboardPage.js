@@ -3,13 +3,17 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import { useNavigate } from 'react-router-dom';
 import reportService from '../services/reportService';
+import patientService from '../services/patientService';
 import PatientTable from '../components/dashboard/PatientTable';
 
 function DashboardPage() {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [patients, setPatients] = useState([]); // Initial state is correctly an array
+  const [searchTerm, setSearchTerm] = useState('');
 
+  // Effect for fetching dashboard summary stats
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -23,6 +27,36 @@ function DashboardPage() {
     };
     fetchStats();
   }, []);
+
+  // Effect for fetching the list of patients
+  useEffect(() => {
+    const fetchPatients = async () => {
+        try {
+            // THE FIX IS HERE: We get the response object...
+            const response = await patientService.getPatients();
+            // ...and we set our state to response.data, which is the array.
+            // The `|| []` is a safety net in case the API returns nothing.
+            setPatients(response.data || []);
+        } catch (error) {
+            console.error('Error fetching patients:', error);
+            setPatients([]); // Also ensure patients is an array on error
+        }
+    };
+    fetchPatients();
+  }, []);
+
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // This will now work correctly because `patients` is guaranteed to be an array
+  const filteredPatients = patients.filter(patient => {
+    const searchTermLower = searchTerm.toLowerCase();
+    const nameMatch = patient.name && patient.name.toLowerCase().includes(searchTermLower);
+    const abhaIdMatch = patient.abhaId && patient.abhaId.toLowerCase().includes(searchTermLower);
+    return nameMatch || abhaIdMatch;
+  });
 
   const StatCard = ({ title, value }) => (
     <div className="stat-card">
@@ -43,8 +77,12 @@ function DashboardPage() {
             <h3>Patient Search</h3>
             <p>Find and open patient profiles</p>
             <div className="search-bar">
-              <input type="text" placeholder="Search by patient name" />
-              <button>Search</button>
+              <input
+                type="text"
+                placeholder="Search by name or ABHA ID"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
             </div>
           </div>
 
@@ -86,13 +124,14 @@ function DashboardPage() {
           {/* Recent Patients Table */}
           <div className="table-container">
             <div className="table-header">
-              <h2>Recent Patients</h2>
+              <h2>{searchTerm ? 'Search Results' : 'Recent Patients'}</h2>
               <button onClick={() => navigate('/diet-chart')}>
                 <span className="material-icons-round">receipt_long</span>
                 Diet Charts
               </button>
             </div>
-            <PatientTable />
+            {/* Pass the filtered patients to the table */}
+            <PatientTable patients={filteredPatients} />
           </div>
         </div>
       </main>
