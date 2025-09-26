@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import authService from '../../services/authService'; // Import the auth service
+import authService from '../../services/authService';
+import logo from 'assets/favicon.png'; // 1. Import the logo
 
 // A simple component for icon-based nav links
 const NavItem = ({ to, icon, label }) => (
@@ -14,7 +15,7 @@ function Header() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    authService.logout(); // Call the service to clear user data
+    authService.logout();
     navigate('/login');
   };
 
@@ -22,7 +23,8 @@ function Header() {
     <header id="app-header">
       {/* Brand/Logo */}
       <div className="brand">
-        <div className="logo">AD</div>
+        {/* 2. Replace the 'AD' div with the image tag */}
+        <img src={logo} alt="Ayur Diet Pro Logo" className="logo-img" />
         <div>
           <h1>Ayur Diet Pro</h1>
           <p>Ayurvedic Diet Management Software</p>
@@ -39,7 +41,6 @@ function Header() {
           <NavItem to="/reports" icon="analytics" label="Reports" />
           <NavItem to="/settings" icon="settings" label="Settings" />
           
-          {/* Logout button is now inside the nav-links bar */}
           <button className="nav-link logout-btn" onClick={handleLogout}>
             <span className="material-icons-round">logout</span>
             Logout
