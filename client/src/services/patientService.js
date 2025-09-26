@@ -24,6 +24,11 @@ const getPatients = () => {
   return axios.get(API_URL, getConfig());
 };
 
+// Get a single patient by ID
+const getPatient = (id) => {
+  return axios.get(API_URL + id, getConfig());
+};
+
 // Update patient
 const updatePatient = (id, patientData) => {
   return axios.put(API_URL + id, patientData, getConfig());
@@ -37,6 +42,7 @@ const deletePatient = (id) => {
 const patientService = {
   createPatient,
   getPatients,
+  getPatient,
   updatePatient,
   deletePatient,
 };

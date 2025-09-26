@@ -19,6 +19,11 @@ const createDietChart = (chartData) => {
   return axios.post(API_URL, chartData, getConfig());
 };
 
+// Get a single diet chart by ID
+const getDietChart = (id) => {
+  return axios.get(API_URL + id, getConfig());
+};
+
 // Get all diet charts for a specific patient
 const getDietChartsForPatient = (patientId) => {
   return axios.get(`${API_URL}patient/${patientId}`, getConfig());
@@ -36,6 +41,7 @@ const deleteDietChart = (id) => {
 
 const dietChartService = {
   createDietChart,
+  getDietChart,
   getDietChartsForPatient,
   updateDietChart,
   deleteDietChart,

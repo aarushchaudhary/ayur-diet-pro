@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import patientService from '../../services/patientService'; // Import the patient service
+import { calculateAge } from '../../utils/dateUtils';
 
 function PatientTable() {
   const [patients, setPatients] = useState([]); // State to hold the patient data
@@ -41,7 +42,7 @@ function PatientTable() {
             <tr key={p._id || index}> {/* Use a unique key like _id from MongoDB */}
               <td>{p.name}</td>
               <td>{p.abhaId || 'N/A'}</td>
-              <td>{p.age}</td>
+              <td>{calculateAge(p.dob) || 'N/A'}</td>
               <td>{p.gender}</td>
               <td>{p.dietaryHabits || 'N/A'}</td>
               {/* Format the date for better readability */}

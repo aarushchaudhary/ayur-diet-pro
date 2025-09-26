@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import patientService from '../../services/patientService';
+import { calculateAge, toInputDateFormat } from '../../utils/dateUtils';
 
 function PatientProfile() {
   const [name, setName] = useState('');
   const [abhaId, setAbhaId] = useState('');
-  const [age, setAge] = useState('30');
+  const [dob, setDob] = useState('');
   const [gender, setGender] = useState('female');
   const [mealFrequency, setMealFrequency] = useState('3');
   const [notes, setNotes] = useState('');
@@ -15,7 +16,7 @@ function PatientProfile() {
         name,
         abhaId,
         gender,
-        dob: new Date().toISOString().split('T')[0], // Current date as placeholder
+        dob: dob, // Use the actual date of birth from the form
         dietaryHabits: notes,
         mealFrequency,
       };
@@ -32,7 +33,7 @@ function PatientProfile() {
   const resetProfile = () => {
     setName('');
     setAbhaId('');
-    setAge('30');
+    setDob('');
     setGender('female');
     setMealFrequency('3');
     setNotes('');
@@ -52,17 +53,24 @@ function PatientProfile() {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div style={{ width: '110px' }}>
-          <label>Age</label>
+        <div style={{ width: '150px' }}>
+          <label>Date of Birth</label>
           <input
-            id="pAge"
-            type="number"
-            min="0"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
+            id="pDob"
+            type="date"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+            max={new Date().toISOString().split('T')[0]} // Prevent future dates
           />
         </div>
       </div>
+      
+      {/* Display calculated age */}
+      {dob && (
+        <div style={{ marginBottom: '10px', fontSize: '14px', color: '#666', fontStyle: 'italic' }}>
+          Calculated Age: {calculateAge(dob)} years old
+        </div>
+      )}
       <div className="form-row">
         <div style={{ flex: 1 }}>
           <label>ABHA ID</label>

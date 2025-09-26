@@ -4,6 +4,9 @@ import LoginPage from './views/LoginPage';
 import RegistrationPage from './views/RegistrationPage'; // Import the new page
 import DashboardPage from './views/DashboardPage';
 import DietChartPage from './views/DietChartPage';
+import EnhancedDietChartPage from './views/EnhancedDietChartPage'; // New enhanced page
+import NewDietChartCreationPage from './views/NewDietChartCreationPage'; // New creation page
+import ViewDietChartPage from './views/ViewDietChartPage'; // New view page
 import PatientsPage from './views/PatientsPage'; // Import new page
 import FoodsPage from './views/FoodsPage';       // Import new page
 import RecipesPage from './views/RecipesPage';   // Import new page
@@ -22,7 +25,9 @@ function App() {
         
         {/* Protected Routes */}
         <Route path="/dashboard" element={isLoggedIn ? <DashboardPage /> : <Navigate to="/login" />} />
-        <Route path="/diet-chart" element={isLoggedIn ? <DietChartPage /> : <Navigate to="/login" />} />
+        <Route path="/diet-chart" element={isLoggedIn ? <EnhancedDietChartPage /> : <Navigate to="/login" />} />
+        <Route path="/diet-chart/new" element={isLoggedIn ? <NewDietChartCreationPage /> : <Navigate to="/login" />} />
+        <Route path="/diet-chart/view/:chartId" element={isLoggedIn ? <ViewDietChartPage /> : <Navigate to="/login" />} />
         <Route path="/patients" element={isLoggedIn ? <PatientsPage /> : <Navigate to="/login" />} />
         <Route path="/foods" element={isLoggedIn ? <FoodsPage /> : <Navigate to="/login" />} />
         <Route path="/recipes" element={isLoggedIn ? <RecipesPage /> : <Navigate to="/login" />} />

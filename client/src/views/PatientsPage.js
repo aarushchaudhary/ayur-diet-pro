@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import patientService from '../services/patientService';
+import { calculateAge } from '../utils/dateUtils';
 
 // --- A Detailed Modal Form for the New Patient Model ---
 const PatientFormModal = ({ patient, onSave, onCancel }) => {
@@ -210,6 +211,7 @@ function PatientsPage() {
                   <th>Name</th>
                   <th>ABHA ID</th>
                   <th>Gender</th>
+                  <th>Age</th>
                   <th>D.O.B</th>
                   <th>Activity Level</th>
                   <th>Actions</th>
@@ -221,6 +223,7 @@ function PatientsPage() {
                     <td>{p.name}</td>
                     <td>{p.abhaId || 'N/A'}</td>
                     <td>{p.gender}</td>
+                    <td>{calculateAge(p.dob) || 'N/A'}</td>
                     <td>{p.dob ? new Date(p.dob).toLocaleDateString() : 'N/A'}</td>
                     <td>{p.activityLevel || 'N/A'}</td>
                     <td className="actions-cell">
@@ -230,7 +233,7 @@ function PatientsPage() {
                   </tr>
                 )) : (
                   <tr>
-                    <td colSpan="6" style={{ textAlign: 'center' }}>No patients found.</td>
+                    <td colSpan="7" style={{ textAlign: 'center' }}>No patients found.</td>
                   </tr>
                 )}
               </tbody>
