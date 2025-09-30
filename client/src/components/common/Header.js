@@ -24,10 +24,10 @@ function Header() {
       {/* Brand/Logo */}
       <div className="brand">
         {/* 2. Replace the 'AD' div with the image tag */}
-        <img src={logo} alt="Ayur Diet Pro Logo" className="logo-img" />
+        <img src={logo} alt="Ayur Diet App Logo" className="logo-img" />
         <div>
-          <h1>Ayur Diet Pro</h1>
-          <p>Ayurvedic Diet Management Software</p>
+          <h1>Ayur Diet App</h1>
+          <p>Ayurvedic Diet Management System</p>
         </div>
       </div>
 
